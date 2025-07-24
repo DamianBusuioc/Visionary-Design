@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Design Showcase</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <h1>Visionary Design</h1>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <!-- Toggle Dark Mode Button -->
+      <button id="toggleDarkMode" aria-label="Toggle Dark Mode" style="margin-left: 1rem; font-size: 1.4rem; background: none; border: none; cursor: pointer;">🌙</button>
+    </div>
+  </header>
+
+  <!-- parallax pe sectiunea hero -->
+  <section class="hero" data-parallax style="position: relative; overflow: hidden;">
+    <!-- SVG Background animat -->
+    <svg
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"
+      viewBox="0 0 800 400"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#00ffff; stop-opacity:0.6" />
+          <stop offset="100%" style="stop-color:#004466; stop-opacity:0.6" />
+        </linearGradient>
+      </defs>
+      <circle cx="200" cy="200" r="150" fill="url(#grad1)">
+        <animate attributeName="r" values="150;180;150" dur="8s" repeatCount="indefinite" />
+        <animate attributeName="cx" values="200;250;200" dur="6s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="600" cy="150" r="100" fill="url(#grad1)">
+        <animate attributeName="r" values="100;130;100" dur="10s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="150;120;150" dur="7s" repeatCount="indefinite" />
+      </circle>
+    </svg>
+
+    <div class="hero-content" style="position: relative; z-index: 1;">
+      <h2>Design that Captivates</h2>
+      <p>Where creativity meets functionality – fully responsive, modern, and sleek websites tailored to impress.</p>
+      <a href="#portfolio" class="btn">Explore Work</a>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <h2>About This Project</h2>
+      <p>This site is built to impress. A showcase of refined design principles combined with seamless functionality. Fully adaptable, engaging, and modern.</p>
+
+      <div class="info-cards">
+        <div class="card">
+          <h3>Our Mission</h3>
+          <p>To craft visually captivating websites that are also easy to use and maintain.</p>
+        </div>
+        <div class="card">
+          <h3>Our Values</h3>
+          <p>Innovation, attention to detail, and client satisfaction are at the core of our work.</p>
+        </div>
+        <div class="card">
+          <h3>Our Team</h3>
+          <p>Freelance developers and designers with a shared passion for modern web design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2>Portfolio</h2>
+      <!-- Carousel wrapper -->
+      <div class="carousel-container" style="position: relative; overflow: hidden;">
+        <button class="carousel-btn prev" aria-label="Previous" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 10;">&lt;</button>
+        <div class="carousel-track" style="display: flex; transition: transform 0.3s ease;">
+          <div class="card" data-parallax>Design 1</div>
+          <div class="card" data-parallax>Design 2</div>
+          <div class="card" data-parallax>Design 3</div>
+          <div class="card" data-parallax>Design 4</div>
+          <div class="card" data-parallax>Design 5</div>
+          <div class="card" data-parallax>Design 6</div>
+        </div>
+        <button class="carousel-btn next" aria-label="Next" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 10;">&gt;</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Why Choose This Design?</h2>
+      <ul>
+        <li>🎨 Visually Striking Layout</li>
+        <li>⚡ Smooth and Fast Experience</li>
+        <li>📱 Fully Responsive on All Devices</li>
+        <li>🛠 Easy to Customize</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Let’s build something amazing together.</p>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Visionary Design. All rights reserved.</p>
+      <p>Contact: youremail@example.com</p>
+    </div>
+  </footer>
+
+  <button id="scrollToTop" title="Go to top">↑</button>
+
+  <script>
+    const scrollBtn = document.getElementById("scrollToTop");
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    const track = document.querySelector('.carousel-track');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    const cards = Array.from(track.children);
+
+    let currentIndex = 0;
+
+    // Așteaptă încărcarea pentru a calcula lățimea cardurilor
+    window.addEventListener('load', () => {
+      const cardStyle = getComputedStyle(cards[0]);
+      const gap = parseInt(cardStyle.marginRight) || 16; // fallback 16px dacă marginRight nu e setat
+      window.cardWidth = cards[0].getBoundingClientRect().width + gap;
+
+      // Aplică tema salvată la încărcare
+      if(localStorage.getItem('theme') === 'dark'){
+        document.body.classList.add('dark-mode');
+        toggleDarkModeBtn.textContent = '☀️';
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        scrollBtn.style.display = "block";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    });
+
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) - 0.5;
+      const y = (e.clientY / window.innerHeight) - 0.5;
+
+      parallaxElements.forEach(el => {
+        const moveX = x * 15;
+        const moveY = y * 15;
+        el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+      });
+    });
+
+    window.addEventListener('mouseout', () => {
+      parallaxElements.forEach(el => {
+        el.style.transform = `translate3d(0,0,0)`;
+      });
+    });
+
+    function updateCarousel() {
+      if (!window.cardWidth) return;
+      track.style.transform = `translateX(-${currentIndex * window.cardWidth}px)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < cards.length - 3) { // afișează 3 carduri odată
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+
+    // Dark mode toggle logic
+    const toggleDarkModeBtn = document.getElementById('toggleDarkMode');
+    toggleDarkModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if(document.body.classList.contains('dark-mode')){
+        toggleDarkModeBtn.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        toggleDarkModeBtn.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
+</body>
+</html>
